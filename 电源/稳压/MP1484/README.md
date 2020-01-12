@@ -25,11 +25,11 @@ Recommended resistance Rx values lists:
 
 # 肖特基二极管选型
 
-| 型号    | 电压/电流 | 供应商                  |
-| ------- | --------- | ----------------------- |
-| B130    | 30V, 1A   | Diodes, Inc.            |
-| SK13    | 30V, 1A   | Diodes, Inc.            |
-| MBRS130 | 30V, 1A   | International Rectifier |
+| 型号    | 电压/额定电流 | 供应商                  |
+| ------- | ------------- | ----------------------- |
+| B130    | 30V, 1A       | Diodes, Inc.            |
+| SK13    | 30V, 1A       | Diodes, Inc.            |
+| MBRS130 | 30V, 1A       | International Rectifier |
 
 # PCB 布局
 
