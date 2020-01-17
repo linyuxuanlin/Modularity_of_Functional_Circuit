@@ -1,7 +1,7 @@
 # 基本参数
 
-* Input: 4.75V ~ 18V
-* Output: 0.925V ~ 20V
+* Input: 4.75V to 18V
+* Output: 0.925V to 20V
 * Current: 3A
 * Efficiency: Up to 95%
 
