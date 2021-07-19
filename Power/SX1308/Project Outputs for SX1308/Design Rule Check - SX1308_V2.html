@@ -1,0 +1,736 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD20\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">2021/7/18</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">19:39:27</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc" class="file"><acronym title="C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc">C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">132</td></tr>
+</table>
+</td>
+</table><a name="IDLRGM0HALIUX5HW2JBNBQGCVETCDU0G2VXSS3HWJYP4VNMPIX4QSJ"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDSOLW0YZUHFFGODX3ZVNXCPZK4PFHYNC5FURD5JKIHHJD22JXTNOD">Clearance Constraint (Gap=10mil) (All),(All)</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDYTBJK2TZJ4LON30UAHPXFJBQ3KQXO5UXRU0WWCP5TWYS32DWTMTF">Clearance Constraint (Gap=10mil) (InNamedPolygon('NONET_L01_P-001')),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDXQJDNULHCZRZNI343KVWRT4WNG5TV4AKEW5AWSPRN5OUPAOSRCTP">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDQLXASFZIGEYEJWCTLCDLJLHSZGO1EHTDKGMFJZOFNF0F3XLOSRJG">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDPT3NBJ3OSIWLCNHRJV4NUR01MIQT5EXC1JE5ZFIB5ONDTIWX1YJK">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDMOMYHPC03DVJCD445JD14Y2RIFQNF32IRHRXIGPQZACKKFQ3UNXO">Width Constraint (Min=10mil) (Max=100mil) (Preferred=15mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDNILRX0JOG141PI204BC5X1ZVXEKYZTOIISWU0CEXW1M1XFZEURRB">Power Plane Connect Rule(Direct Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDEYQ3WGBFOXHVMOSTUZMDVW4WDI3WJNMUB3EH2UOHF54V5X4MLDOM">Hole Size Constraint (Min=1mil) (Max=100mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDJOIWN12FMQKGKJNAVQ0RJ5RKYJVD0J23XRID55O2S2VDV5OGPGBB">Hole To Hole Clearance (Gap=10mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDT21U4VSEK3YGJ4KZG4XMJQJSJLAV4K0DSL5XKWLPFDKWS4UMDIJK">Minimum Solder Mask Sliver (Gap=10mil) (All),(All)</a></td>
+<td class="column2">71</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDVEDOA5XMRMKMBRW0M3NQYOHELPZ533I1T4CIBHNG3N4QBVU03UTK">Silk To Solder Mask (Clearance=10mil) (IsPad),(All)</a></td>
+<td class="column2">60</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDGTL0NRMYNGCWITDUUAAAXDC4BFASEIOCA3EJ0ZNE4YGIGJOYQ0ED">Silk to Silk (Clearance=10mil) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDDHHPE4T3NGXXLBLF0WSC0SRJ53YWSK3FFLYAYE3ZWJTDSXCOYAC">Net Antennae (Tolerance=0mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDVXQK4OHBCDZYLDLT5ZLHLUONGORIQD1G0HX4AMOZNRMVETBRTG4C">Height Constraint (Min=0mil) (Max=1000mil) (Prefered=500mil) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">132</td>
+</tr>
+</table><br><a name="IDSOLW0YZUHFFGODX3ZVNXCPZK4PFHYNC5FURD5JKIHHJD22JXTNOD"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Clearance Constraint (Gap=10mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5523.193mil|Location2.X=5534.443mil|Location1.Y=3113.193mil|Location2.Y=3124.443mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5523.193mil|Location2.X=5534.443mil|Location1.Y=3113.193mil|Location2.Y=3124.443mil|Absolute=True">Clearance Constraint: (9.556mil &lt; 10mil) Between Track (5350mil,3315mil)(5590mil,3075mil) on Bottom Layer And Via (5515mil,3105mil) from Top Layer to Bottom Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDT21U4VSEK3YGJ4KZG4XMJQJSJLAV4K0DSL5XKWLPFDKWS4UMDIJK"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=10mil) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5272.946mil|Location2.X=5284.196mil|Location1.Y=3175.094mil|Location2.Y=3186.344mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5272.946mil|Location2.X=5284.196mil|Location1.Y=3175.094mil|Location2.Y=3186.344mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (6mil &lt; 10mil) Between Pad IC1-1(5297.571mil,3161.719mil) on Top Layer And Pad IC1-2(5297.571mil,3199.719mil) on Top Layer [Top Solder] Mask Sliver [6mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5268.042mil|Location2.X=5279.292mil|Location1.Y=3149.375mil|Location2.Y=3160.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5268.042mil|Location2.X=5279.292mil|Location1.Y=3149.375mil|Location2.Y=3160.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.807mil &lt; 10mil) Between Pad IC1-1(5297.571mil,3161.719mil) on Top Layer And Via (5250mil,3155mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [9.807mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5272.946mil|Location2.X=5284.196mil|Location1.Y=3213.094mil|Location2.Y=3224.344mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5272.946mil|Location2.X=5284.196mil|Location1.Y=3213.094mil|Location2.Y=3224.344mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (6mil &lt; 10mil) Between Pad IC1-2(5297.571mil,3199.719mil) on Top Layer And Pad IC1-3(5297.571mil,3237.719mil) on Top Layer [Top Solder] Mask Sliver [6mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5268.042mil|Location2.X=5279.292mil|Location1.Y=3194.375mil|Location2.Y=3205.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5268.042mil|Location2.X=5279.292mil|Location1.Y=3194.375mil|Location2.Y=3205.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.807mil &lt; 10mil) Between Pad IC1-2(5297.571mil,3199.719mil) on Top Layer And Via (5250mil,3200mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [9.807mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5268.042mil|Location2.X=5279.292mil|Location1.Y=3239.375mil|Location2.Y=3250.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5268.042mil|Location2.X=5279.292mil|Location1.Y=3239.375mil|Location2.Y=3250.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.807mil &lt; 10mil) Between Pad IC1-3(5297.571mil,3237.719mil) on Top Layer And Via (5250mil,3245mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [9.807mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5178.946mil|Location2.X=5190.196mil|Location1.Y=3213.094mil|Location2.Y=3224.344mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5178.946mil|Location2.X=5190.196mil|Location1.Y=3213.094mil|Location2.Y=3224.344mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (6mil &lt; 10mil) Between Pad IC1-4(5203.571mil,3237.719mil) on Top Layer And Pad IC1-5(5203.571mil,3199.719mil) on Top Layer [Top Solder] Mask Sliver [6mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5221.279mil|Location2.X=5232.529mil|Location1.Y=3239.375mil|Location2.Y=3250.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5221.279mil|Location2.X=5232.529mil|Location1.Y=3239.375mil|Location2.Y=3250.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.665mil &lt; 10mil) Between Pad IC1-4(5203.571mil,3237.719mil) on Top Layer And Via (5250mil,3245mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [8.665mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5178.946mil|Location2.X=5190.196mil|Location1.Y=3175.094mil|Location2.Y=3186.344mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5178.946mil|Location2.X=5190.196mil|Location1.Y=3175.094mil|Location2.Y=3186.344mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (6mil &lt; 10mil) Between Pad IC1-5(5203.571mil,3199.719mil) on Top Layer And Pad IC1-6(5203.571mil,3161.719mil) on Top Layer [Top Solder] Mask Sliver [6mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5221.279mil|Location2.X=5232.529mil|Location1.Y=3194.375mil|Location2.Y=3205.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5221.279mil|Location2.X=5232.529mil|Location1.Y=3194.375mil|Location2.Y=3205.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.665mil &lt; 10mil) Between Pad IC1-5(5203.571mil,3199.719mil) on Top Layer And Via (5250mil,3200mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [8.665mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5221.279mil|Location2.X=5232.529mil|Location1.Y=3149.375mil|Location2.Y=3160.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5221.279mil|Location2.X=5232.529mil|Location1.Y=3149.375mil|Location2.Y=3160.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (8.665mil &lt; 10mil) Between Pad IC1-6(5203.571mil,3161.719mil) on Top Layer And Via (5250mil,3155mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [8.665mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5564.257mil|Location2.X=5575.507mil|Location1.Y=3174.375mil|Location2.Y=3185.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5564.257mil|Location2.X=5575.507mil|Location1.Y=3174.375mil|Location2.Y=3185.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (2.236mil &lt; 10mil) Between Polygon Region (0 hole(s)) Bottom Solder And Via (5550mil,3180mil) from Top Layer to Bottom Layer [Bottom Solder] Mask Sliver [2.236mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5564.257mil|Location2.X=5575.507mil|Location1.Y=3219.375mil|Location2.Y=3230.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5564.257mil|Location2.X=5575.507mil|Location1.Y=3219.375mil|Location2.Y=3230.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (2.236mil &lt; 10mil) Between Polygon Region (0 hole(s)) Bottom Solder And Via (5550mil,3225mil) from Top Layer to Bottom Layer [Bottom Solder] Mask Sliver [2.236mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5564.257mil|Location2.X=5575.507mil|Location1.Y=3264.375mil|Location2.Y=3275.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5564.257mil|Location2.X=5575.507mil|Location1.Y=3264.375mil|Location2.Y=3275.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (2.236mil &lt; 10mil) Between Polygon Region (0 hole(s)) Bottom Solder And Via (5550mil,3270mil) from Top Layer to Bottom Layer [Bottom Solder] Mask Sliver [2.236mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5564.257mil|Location2.X=5575.507mil|Location1.Y=3309.375mil|Location2.Y=3320.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5564.257mil|Location2.X=5575.507mil|Location1.Y=3309.375mil|Location2.Y=3320.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (2.236mil &lt; 10mil) Between Polygon Region (0 hole(s)) Bottom Solder And Via (5550mil,3315mil) from Top Layer to Bottom Layer [Bottom Solder] Mask Sliver [2.236mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5564.257mil|Location2.X=5575.507mil|Location1.Y=3354.375mil|Location2.Y=3365.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5564.257mil|Location2.X=5575.507mil|Location1.Y=3354.375mil|Location2.Y=3365.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (2.236mil &lt; 10mil) Between Polygon Region (0 hole(s)) Bottom Solder And Via (5550mil,3360mil) from Top Layer to Bottom Layer [Bottom Solder] Mask Sliver [2.236mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5564.257mil|Location2.X=5575.507mil|Location1.Y=3174.375mil|Location2.Y=3185.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5564.257mil|Location2.X=5575.507mil|Location1.Y=3174.375mil|Location2.Y=3185.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (2.236mil &lt; 10mil) Between Polygon Region (0 hole(s)) Top Solder And Via (5550mil,3180mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [2.236mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5564.257mil|Location2.X=5575.507mil|Location1.Y=3219.375mil|Location2.Y=3230.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5564.257mil|Location2.X=5575.507mil|Location1.Y=3219.375mil|Location2.Y=3230.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (2.236mil &lt; 10mil) Between Polygon Region (0 hole(s)) Top Solder And Via (5550mil,3225mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [2.236mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5564.257mil|Location2.X=5575.507mil|Location1.Y=3264.375mil|Location2.Y=3275.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5564.257mil|Location2.X=5575.507mil|Location1.Y=3264.375mil|Location2.Y=3275.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (2.236mil &lt; 10mil) Between Polygon Region (0 hole(s)) Top Solder And Via (5550mil,3270mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [2.236mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5564.257mil|Location2.X=5575.507mil|Location1.Y=3309.375mil|Location2.Y=3320.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5564.257mil|Location2.X=5575.507mil|Location1.Y=3309.375mil|Location2.Y=3320.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (2.236mil &lt; 10mil) Between Polygon Region (0 hole(s)) Top Solder And Via (5550mil,3315mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [2.236mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5564.257mil|Location2.X=5575.507mil|Location1.Y=3354.375mil|Location2.Y=3365.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5564.257mil|Location2.X=5575.507mil|Location1.Y=3354.375mil|Location2.Y=3365.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (2.236mil &lt; 10mil) Between Polygon Region (0 hole(s)) Top Solder And Via (5550mil,3360mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [2.236mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5159.375mil|Location2.X=5170.625mil|Location1.Y=2881.875mil|Location2.Y=2893.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5159.375mil|Location2.X=5170.625mil|Location1.Y=2881.875mil|Location2.Y=2893.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5165mil,2865mil) from Top Layer to Bottom Layer And Via (5165mil,2910mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5181.875mil|Location2.X=5193.125mil|Location1.Y=2859.375mil|Location2.Y=2870.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5181.875mil|Location2.X=5193.125mil|Location1.Y=2859.375mil|Location2.Y=2870.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5165mil,2865mil) from Top Layer to Bottom Layer And Via (5210mil,2865mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5159.375mil|Location2.X=5170.625mil|Location1.Y=2926.875mil|Location2.Y=2938.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5159.375mil|Location2.X=5170.625mil|Location1.Y=2926.875mil|Location2.Y=2938.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5165mil,2910mil) from Top Layer to Bottom Layer And Via (5165mil,2955mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5181.875mil|Location2.X=5193.125mil|Location1.Y=2904.375mil|Location2.Y=2915.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5181.875mil|Location2.X=5193.125mil|Location1.Y=2904.375mil|Location2.Y=2915.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5165mil,2910mil) from Top Layer to Bottom Layer And Via (5210mil,2910mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5159.375mil|Location2.X=5170.625mil|Location1.Y=2971.875mil|Location2.Y=2983.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5159.375mil|Location2.X=5170.625mil|Location1.Y=2971.875mil|Location2.Y=2983.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5165mil,2955mil) from Top Layer to Bottom Layer And Via (5165mil,3000mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5181.875mil|Location2.X=5193.125mil|Location1.Y=2949.375mil|Location2.Y=2960.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5181.875mil|Location2.X=5193.125mil|Location1.Y=2949.375mil|Location2.Y=2960.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5165mil,2955mil) from Top Layer to Bottom Layer And Via (5210mil,2955mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5159.375mil|Location2.X=5170.625mil|Location1.Y=3016.875mil|Location2.Y=3028.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5159.375mil|Location2.X=5170.625mil|Location1.Y=3016.875mil|Location2.Y=3028.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5165mil,3000mil) from Top Layer to Bottom Layer And Via (5165mil,3045mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5181.875mil|Location2.X=5193.125mil|Location1.Y=2994.375mil|Location2.Y=3005.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5181.875mil|Location2.X=5193.125mil|Location1.Y=2994.375mil|Location2.Y=3005.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5165mil,3000mil) from Top Layer to Bottom Layer And Via (5210mil,3000mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5159.375mil|Location2.X=5170.625mil|Location1.Y=3061.875mil|Location2.Y=3073.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5159.375mil|Location2.X=5170.625mil|Location1.Y=3061.875mil|Location2.Y=3073.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5165mil,3045mil) from Top Layer to Bottom Layer And Via (5165mil,3090mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5181.875mil|Location2.X=5193.125mil|Location1.Y=3039.375mil|Location2.Y=3050.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5181.875mil|Location2.X=5193.125mil|Location1.Y=3039.375mil|Location2.Y=3050.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5165mil,3045mil) from Top Layer to Bottom Layer And Via (5210mil,3045mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5181.875mil|Location2.X=5193.125mil|Location1.Y=3084.375mil|Location2.Y=3095.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5181.875mil|Location2.X=5193.125mil|Location1.Y=3084.375mil|Location2.Y=3095.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5165mil,3090mil) from Top Layer to Bottom Layer And Via (5210mil,3090mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5204.375mil|Location2.X=5215.625mil|Location1.Y=2881.875mil|Location2.Y=2893.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5204.375mil|Location2.X=5215.625mil|Location1.Y=2881.875mil|Location2.Y=2893.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5210mil,2865mil) from Top Layer to Bottom Layer And Via (5210mil,2910mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5204.375mil|Location2.X=5215.625mil|Location1.Y=2926.875mil|Location2.Y=2938.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5204.375mil|Location2.X=5215.625mil|Location1.Y=2926.875mil|Location2.Y=2938.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5210mil,2910mil) from Top Layer to Bottom Layer And Via (5210mil,2955mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5204.375mil|Location2.X=5215.625mil|Location1.Y=2971.875mil|Location2.Y=2983.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5204.375mil|Location2.X=5215.625mil|Location1.Y=2971.875mil|Location2.Y=2983.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5210mil,2955mil) from Top Layer to Bottom Layer And Via (5210mil,3000mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5204.375mil|Location2.X=5215.625mil|Location1.Y=3016.875mil|Location2.Y=3028.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5204.375mil|Location2.X=5215.625mil|Location1.Y=3016.875mil|Location2.Y=3028.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5210mil,3000mil) from Top Layer to Bottom Layer And Via (5210mil,3045mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5204.375mil|Location2.X=5215.625mil|Location1.Y=3061.875mil|Location2.Y=3073.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5204.375mil|Location2.X=5215.625mil|Location1.Y=3061.875mil|Location2.Y=3073.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5210mil,3045mil) from Top Layer to Bottom Layer And Via (5210mil,3090mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5244.375mil|Location2.X=5255.625mil|Location1.Y=3171.875mil|Location2.Y=3183.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5244.375mil|Location2.X=5255.625mil|Location1.Y=3171.875mil|Location2.Y=3183.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5250mil,3155mil) from Top Layer to Bottom Layer And Via (5250mil,3200mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5244.375mil|Location2.X=5255.625mil|Location1.Y=3216.875mil|Location2.Y=3228.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5244.375mil|Location2.X=5255.625mil|Location1.Y=3216.875mil|Location2.Y=3228.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5250mil,3200mil) from Top Layer to Bottom Layer And Via (5250mil,3245mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5349.375mil|Location2.X=5360.625mil|Location1.Y=3176.875mil|Location2.Y=3188.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5349.375mil|Location2.X=5360.625mil|Location1.Y=3176.875mil|Location2.Y=3188.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5355mil,3160mil) from Top Layer to Bottom Layer And Via (5355mil,3205mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5361.875mil|Location2.X=5373.125mil|Location1.Y=3134.375mil|Location2.Y=3145.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5361.875mil|Location2.X=5373.125mil|Location1.Y=3134.375mil|Location2.Y=3145.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.642mil &lt; 10mil) Between Via (5355mil,3160mil) from Top Layer to Bottom Layer And Via (5380mil,3120mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [9.642mil] / [Bottom Solder] Mask Sliver [9.642mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5371.875mil|Location2.X=5383.125mil|Location1.Y=3154.375mil|Location2.Y=3165.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5371.875mil|Location2.X=5383.125mil|Location1.Y=3154.375mil|Location2.Y=3165.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5355mil,3160mil) from Top Layer to Bottom Layer And Via (5400mil,3160mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5349.375mil|Location2.X=5360.625mil|Location1.Y=3221.875mil|Location2.Y=3233.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5349.375mil|Location2.X=5360.625mil|Location1.Y=3221.875mil|Location2.Y=3233.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5355mil,3205mil) from Top Layer to Bottom Layer And Via (5355mil,3250mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5371.875mil|Location2.X=5383.125mil|Location1.Y=3199.375mil|Location2.Y=3210.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5371.875mil|Location2.X=5383.125mil|Location1.Y=3199.375mil|Location2.Y=3210.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5355mil,3205mil) from Top Layer to Bottom Layer And Via (5400mil,3205mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5384.375mil|Location2.X=5395.625mil|Location1.Y=3134.375mil|Location2.Y=3145.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5384.375mil|Location2.X=5395.625mil|Location1.Y=3134.375mil|Location2.Y=3145.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.194mil &lt; 10mil) Between Via (5380mil,3120mil) from Top Layer to Bottom Layer And Via (5400mil,3160mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.194mil] / [Bottom Solder] Mask Sliver [7.194mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5396.875mil|Location2.X=5408.125mil|Location1.Y=3114.375mil|Location2.Y=3125.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5396.875mil|Location2.X=5408.125mil|Location1.Y=3114.375mil|Location2.Y=3125.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5380mil,3120mil) from Top Layer to Bottom Layer And Via (5425mil,3120mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5394.375mil|Location2.X=5405.625mil|Location1.Y=3176.875mil|Location2.Y=3188.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5394.375mil|Location2.X=5405.625mil|Location1.Y=3176.875mil|Location2.Y=3188.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5400mil,3160mil) from Top Layer to Bottom Layer And Via (5400mil,3205mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5406.875mil|Location2.X=5418.125mil|Location1.Y=3134.375mil|Location2.Y=3145.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5406.875mil|Location2.X=5418.125mil|Location1.Y=3134.375mil|Location2.Y=3145.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.642mil &lt; 10mil) Between Via (5400mil,3160mil) from Top Layer to Bottom Layer And Via (5425mil,3120mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [9.642mil] / [Bottom Solder] Mask Sliver [9.642mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5416.875mil|Location2.X=5428.125mil|Location1.Y=3154.375mil|Location2.Y=3165.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5416.875mil|Location2.X=5428.125mil|Location1.Y=3154.375mil|Location2.Y=3165.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5400mil,3160mil) from Top Layer to Bottom Layer And Via (5445mil,3160mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5409.375mil|Location2.X=5420.625mil|Location1.Y=3331.875mil|Location2.Y=3343.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5409.375mil|Location2.X=5420.625mil|Location1.Y=3331.875mil|Location2.Y=3343.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5415mil,3315mil) from Top Layer to Bottom Layer And Via (5415mil,3360mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5431.875mil|Location2.X=5443.125mil|Location1.Y=3309.375mil|Location2.Y=3320.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5431.875mil|Location2.X=5443.125mil|Location1.Y=3309.375mil|Location2.Y=3320.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5415mil,3315mil) from Top Layer to Bottom Layer And Via (5460mil,3315mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5431.875mil|Location2.X=5443.125mil|Location1.Y=3354.375mil|Location2.Y=3365.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5431.875mil|Location2.X=5443.125mil|Location1.Y=3354.375mil|Location2.Y=3365.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5415mil,3360mil) from Top Layer to Bottom Layer And Via (5460mil,3360mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5429.375mil|Location2.X=5440.625mil|Location1.Y=3134.375mil|Location2.Y=3145.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5429.375mil|Location2.X=5440.625mil|Location1.Y=3134.375mil|Location2.Y=3145.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.194mil &lt; 10mil) Between Via (5425mil,3120mil) from Top Layer to Bottom Layer And Via (5445mil,3160mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.194mil] / [Bottom Solder] Mask Sliver [7.194mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5441.875mil|Location2.X=5453.125mil|Location1.Y=3114.375mil|Location2.Y=3125.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5441.875mil|Location2.X=5453.125mil|Location1.Y=3114.375mil|Location2.Y=3125.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5425mil,3120mil) from Top Layer to Bottom Layer And Via (5470mil,3120mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5451.875mil|Location2.X=5463.125mil|Location1.Y=3134.375mil|Location2.Y=3145.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5451.875mil|Location2.X=5463.125mil|Location1.Y=3134.375mil|Location2.Y=3145.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.642mil &lt; 10mil) Between Via (5445mil,3160mil) from Top Layer to Bottom Layer And Via (5470mil,3120mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [9.642mil] / [Bottom Solder] Mask Sliver [9.642mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5454.375mil|Location2.X=5465.625mil|Location1.Y=3286.875mil|Location2.Y=3298.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5454.375mil|Location2.X=5465.625mil|Location1.Y=3286.875mil|Location2.Y=3298.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5460mil,3270mil) from Top Layer to Bottom Layer And Via (5460mil,3315mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5476.875mil|Location2.X=5488.125mil|Location1.Y=3264.375mil|Location2.Y=3275.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5476.875mil|Location2.X=5488.125mil|Location1.Y=3264.375mil|Location2.Y=3275.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5460mil,3270mil) from Top Layer to Bottom Layer And Via (5505mil,3270mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5454.375mil|Location2.X=5465.625mil|Location1.Y=3331.875mil|Location2.Y=3343.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5454.375mil|Location2.X=5465.625mil|Location1.Y=3331.875mil|Location2.Y=3343.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5460mil,3315mil) from Top Layer to Bottom Layer And Via (5460mil,3360mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5476.875mil|Location2.X=5488.125mil|Location1.Y=3309.375mil|Location2.Y=3320.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5476.875mil|Location2.X=5488.125mil|Location1.Y=3309.375mil|Location2.Y=3320.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5460mil,3315mil) from Top Layer to Bottom Layer And Via (5505mil,3315mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5476.875mil|Location2.X=5488.125mil|Location1.Y=3354.375mil|Location2.Y=3365.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5476.875mil|Location2.X=5488.125mil|Location1.Y=3354.375mil|Location2.Y=3365.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5460mil,3360mil) from Top Layer to Bottom Layer And Via (5505mil,3360mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5486.875mil|Location2.X=5498.125mil|Location1.Y=3106.875mil|Location2.Y=3118.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5486.875mil|Location2.X=5498.125mil|Location1.Y=3106.875mil|Location2.Y=3118.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (9.907mil &lt; 10mil) Between Via (5470mil,3120mil) from Top Layer to Bottom Layer And Via (5515mil,3105mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [9.907mil] / [Bottom Solder] Mask Sliver [9.907mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5499.375mil|Location2.X=5510.625mil|Location1.Y=3241.875mil|Location2.Y=3253.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5499.375mil|Location2.X=5510.625mil|Location1.Y=3241.875mil|Location2.Y=3253.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5505mil,3225mil) from Top Layer to Bottom Layer And Via (5505mil,3270mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5521.875mil|Location2.X=5533.125mil|Location1.Y=3219.375mil|Location2.Y=3230.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5521.875mil|Location2.X=5533.125mil|Location1.Y=3219.375mil|Location2.Y=3230.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5505mil,3225mil) from Top Layer to Bottom Layer And Via (5550mil,3225mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5499.375mil|Location2.X=5510.625mil|Location1.Y=3286.875mil|Location2.Y=3298.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5499.375mil|Location2.X=5510.625mil|Location1.Y=3286.875mil|Location2.Y=3298.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5505mil,3270mil) from Top Layer to Bottom Layer And Via (5505mil,3315mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5521.875mil|Location2.X=5533.125mil|Location1.Y=3264.375mil|Location2.Y=3275.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5521.875mil|Location2.X=5533.125mil|Location1.Y=3264.375mil|Location2.Y=3275.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5505mil,3270mil) from Top Layer to Bottom Layer And Via (5550mil,3270mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5499.375mil|Location2.X=5510.625mil|Location1.Y=3331.875mil|Location2.Y=3343.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5499.375mil|Location2.X=5510.625mil|Location1.Y=3331.875mil|Location2.Y=3343.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5505mil,3315mil) from Top Layer to Bottom Layer And Via (5505mil,3360mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5521.875mil|Location2.X=5533.125mil|Location1.Y=3309.375mil|Location2.Y=3320.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5521.875mil|Location2.X=5533.125mil|Location1.Y=3309.375mil|Location2.Y=3320.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5505mil,3315mil) from Top Layer to Bottom Layer And Via (5550mil,3315mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5521.875mil|Location2.X=5533.125mil|Location1.Y=3354.375mil|Location2.Y=3365.625mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5521.875mil|Location2.X=5533.125mil|Location1.Y=3354.375mil|Location2.Y=3365.625mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5505mil,3360mil) from Top Layer to Bottom Layer And Via (5550mil,3360mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5544.375mil|Location2.X=5555.625mil|Location1.Y=3196.875mil|Location2.Y=3208.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5544.375mil|Location2.X=5555.625mil|Location1.Y=3196.875mil|Location2.Y=3208.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5550mil,3180mil) from Top Layer to Bottom Layer And Via (5550mil,3225mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5544.375mil|Location2.X=5555.625mil|Location1.Y=3241.875mil|Location2.Y=3253.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5544.375mil|Location2.X=5555.625mil|Location1.Y=3241.875mil|Location2.Y=3253.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5550mil,3225mil) from Top Layer to Bottom Layer And Via (5550mil,3270mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5544.375mil|Location2.X=5555.625mil|Location1.Y=3286.875mil|Location2.Y=3298.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5544.375mil|Location2.X=5555.625mil|Location1.Y=3286.875mil|Location2.Y=3298.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5550mil,3270mil) from Top Layer to Bottom Layer And Via (5550mil,3315mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5544.375mil|Location2.X=5555.625mil|Location1.Y=3331.875mil|Location2.Y=3343.125mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5544.375mil|Location2.X=5555.625mil|Location1.Y=3331.875mil|Location2.Y=3343.125mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (7.472mil &lt; 10mil) Between Via (5550mil,3315mil) from Top Layer to Bottom Layer And Via (5550mil,3360mil) from Top Layer to Bottom Layer [Top Solder] Mask Sliver [7.472mil] / [Bottom Solder] Mask Sliver [7.472mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDVEDOA5XMRMKMBRW0M3NQYOHELPZ533I1T4CIBHNG3N4QBVU03UTK"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=10mil) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5039.635mil|Location2.X=5050.885mil|Location1.Y=3241.881mil|Location2.Y=3253.131mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5039.635mil|Location2.X=5050.885mil|Location1.Y=3241.881mil|Location2.Y=3253.131mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad C1-1(5066.74mil,3231.758mil) on Top Layer And Track (5038.74mil,3231.758mil)(5038.74mil,3256.656mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5042.218mil|Location2.X=5053.468mil|Location1.Y=3244.487mil|Location2.Y=3255.737mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5042.218mil|Location2.X=5053.468mil|Location1.Y=3244.487mil|Location2.Y=3255.737mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.213mil &lt; 10mil) Between Pad C1-1(5066.74mil,3231.758mil) on Top Layer And Track (5038.74mil,3256.656mil)(5094.74mil,3256.656mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.213mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5078.334mil|Location2.X=5089.584mil|Location1.Y=3207.028mil|Location2.Y=3218.278mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5078.334mil|Location2.X=5089.584mil|Location1.Y=3207.028mil|Location2.Y=3218.278mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (7.508mil &lt; 10mil) Between Pad C1-1(5066.74mil,3231.758mil) on Top Layer And Track (5052.961mil,3205.774mil)(5080.52mil,3205.774mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [7.508mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5082.596mil|Location2.X=5093.846mil|Location1.Y=3226.133mil|Location2.Y=3237.383mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5082.596mil|Location2.X=5093.846mil|Location1.Y=3226.133mil|Location2.Y=3237.383mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad C1-1(5066.74mil,3231.758mil) on Top Layer And Track (5094.74mil,3231.758mil)(5094.74mil,3256.656mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5039.635mil|Location2.X=5050.885mil|Location1.Y=3148.18mil|Location2.Y=3159.43mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5039.635mil|Location2.X=5050.885mil|Location1.Y=3148.18mil|Location2.Y=3159.43mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad C1-2(5066.74mil,3169.553mil) on Top Layer And Track (5038.74mil,3144.656mil)(5038.74mil,3169.553mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5080.013mil|Location2.X=5091.263mil|Location1.Y=3145.574mil|Location2.Y=3156.824mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5080.013mil|Location2.X=5091.263mil|Location1.Y=3145.574mil|Location2.Y=3156.824mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.213mil &lt; 10mil) Between Pad C1-2(5066.74mil,3169.553mil) on Top Layer And Track (5038.74mil,3144.656mil)(5094.74mil,3144.656mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.213mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5047.336mil|Location2.X=5058.586mil|Location1.Y=3182.826mil|Location2.Y=3194.076mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5047.336mil|Location2.X=5058.586mil|Location1.Y=3182.826mil|Location2.Y=3194.076mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (6.299mil &lt; 10mil) Between Pad C1-2(5066.74mil,3169.553mil) on Top Layer And Track (5052.961mil,3195.537mil)(5080.52mil,3195.537mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [6.299mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5082.596mil|Location2.X=5093.846mil|Location1.Y=3148.18mil|Location2.Y=3159.43mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5082.596mil|Location2.X=5093.846mil|Location1.Y=3148.18mil|Location2.Y=3159.43mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad C1-2(5066.74mil,3169.553mil) on Top Layer And Track (5094.74mil,3144.656mil)(5094.74mil,3169.553mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5113.519mil|Location2.X=5124.769mil|Location1.Y=3241.881mil|Location2.Y=3253.131mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5113.519mil|Location2.X=5124.769mil|Location1.Y=3241.881mil|Location2.Y=3253.131mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad C2-1(5140.624mil,3231.758mil) on Top Layer And Track (5112.624mil,3231.758mil)(5112.624mil,3256.656mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5116.102mil|Location2.X=5127.352mil|Location1.Y=3244.487mil|Location2.Y=3255.737mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5116.102mil|Location2.X=5127.352mil|Location1.Y=3244.487mil|Location2.Y=3255.737mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.213mil &lt; 10mil) Between Pad C2-1(5140.624mil,3231.758mil) on Top Layer And Track (5112.624mil,3256.656mil)(5168.624mil,3256.656mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.213mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5152.218mil|Location2.X=5163.468mil|Location1.Y=3207.028mil|Location2.Y=3218.278mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5152.218mil|Location2.X=5163.468mil|Location1.Y=3207.028mil|Location2.Y=3218.278mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (7.508mil &lt; 10mil) Between Pad C2-1(5140.624mil,3231.758mil) on Top Layer And Track (5126.845mil,3205.774mil)(5154.404mil,3205.774mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [7.508mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5156.48mil|Location2.X=5167.73mil|Location1.Y=3226.133mil|Location2.Y=3237.383mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5156.48mil|Location2.X=5167.73mil|Location1.Y=3226.133mil|Location2.Y=3237.383mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad C2-1(5140.624mil,3231.758mil) on Top Layer And Track (5168.624mil,3231.758mil)(5168.624mil,3256.656mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5113.519mil|Location2.X=5124.769mil|Location1.Y=3148.18mil|Location2.Y=3159.43mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5113.519mil|Location2.X=5124.769mil|Location1.Y=3148.18mil|Location2.Y=3159.43mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad C2-2(5140.624mil,3169.553mil) on Top Layer And Track (5112.624mil,3144.656mil)(5112.624mil,3169.553mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5153.897mil|Location2.X=5165.147mil|Location1.Y=3145.574mil|Location2.Y=3156.824mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5153.897mil|Location2.X=5165.147mil|Location1.Y=3145.574mil|Location2.Y=3156.824mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.213mil &lt; 10mil) Between Pad C2-2(5140.624mil,3169.553mil) on Top Layer And Track (5112.624mil,3144.656mil)(5168.624mil,3144.656mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.213mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5121.22mil|Location2.X=5132.47mil|Location1.Y=3182.826mil|Location2.Y=3194.076mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5121.22mil|Location2.X=5132.47mil|Location1.Y=3182.826mil|Location2.Y=3194.076mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (6.299mil &lt; 10mil) Between Pad C2-2(5140.624mil,3169.553mil) on Top Layer And Track (5126.845mil,3195.537mil)(5154.404mil,3195.537mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [6.299mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5156.48mil|Location2.X=5167.73mil|Location1.Y=3148.18mil|Location2.Y=3159.43mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5156.48mil|Location2.X=5167.73mil|Location1.Y=3148.18mil|Location2.Y=3159.43mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad C2-2(5140.624mil,3169.553mil) on Top Layer And Track (5168.624mil,3144.656mil)(5168.624mil,3169.553mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5501.387mil|Location2.X=5512.637mil|Location1.Y=2836.261mil|Location2.Y=2847.511mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5501.387mil|Location2.X=5512.637mil|Location1.Y=2836.261mil|Location2.Y=2847.511mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad C3-1(5528.492mil,2857.634mil) on Top Layer And Track (5500.492mil,2832.736mil)(5500.492mil,2857.634mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5541.765mil|Location2.X=5553.015mil|Location1.Y=2833.655mil|Location2.Y=2844.905mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5541.765mil|Location2.X=5553.015mil|Location1.Y=2833.655mil|Location2.Y=2844.905mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.213mil &lt; 10mil) Between Pad C3-1(5528.492mil,2857.634mil) on Top Layer And Track (5500.492mil,2832.736mil)(5556.492mil,2832.736mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.213mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5509.088mil|Location2.X=5520.338mil|Location1.Y=2870.906mil|Location2.Y=2882.156mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5509.088mil|Location2.X=5520.338mil|Location1.Y=2870.906mil|Location2.Y=2882.156mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (6.299mil &lt; 10mil) Between Pad C3-1(5528.492mil,2857.634mil) on Top Layer And Track (5514.713mil,2883.618mil)(5542.272mil,2883.618mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [6.299mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5544.348mil|Location2.X=5555.598mil|Location1.Y=2836.261mil|Location2.Y=2847.511mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5544.348mil|Location2.X=5555.598mil|Location1.Y=2836.261mil|Location2.Y=2847.511mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad C3-1(5528.492mil,2857.634mil) on Top Layer And Track (5556.492mil,2832.736mil)(5556.492mil,2857.634mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5501.387mil|Location2.X=5512.637mil|Location1.Y=2929.961mil|Location2.Y=2941.211mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5501.387mil|Location2.X=5512.637mil|Location1.Y=2929.961mil|Location2.Y=2941.211mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad C3-2(5528.492mil,2919.838mil) on Top Layer And Track (5500.492mil,2919.838mil)(5500.492mil,2944.736mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5503.97mil|Location2.X=5515.22mil|Location1.Y=2932.568mil|Location2.Y=2943.818mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5503.97mil|Location2.X=5515.22mil|Location1.Y=2932.568mil|Location2.Y=2943.818mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.213mil &lt; 10mil) Between Pad C3-2(5528.492mil,2919.838mil) on Top Layer And Track (5500.492mil,2944.736mil)(5556.492mil,2944.736mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.213mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5540.086mil|Location2.X=5551.336mil|Location1.Y=2895.108mil|Location2.Y=2906.358mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5540.086mil|Location2.X=5551.336mil|Location1.Y=2895.108mil|Location2.Y=2906.358mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (7.507mil &lt; 10mil) Between Pad C3-2(5528.492mil,2919.838mil) on Top Layer And Track (5514.713mil,2893.854mil)(5542.272mil,2893.854mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [7.507mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5544.348mil|Location2.X=5555.598mil|Location1.Y=2914.213mil|Location2.Y=2925.463mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5544.348mil|Location2.X=5555.598mil|Location1.Y=2914.213mil|Location2.Y=2925.463mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad C3-2(5528.492mil,2919.838mil) on Top Layer And Track (5556.492mil,2919.838mil)(5556.492mil,2944.736mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5501.387mil|Location2.X=5512.637mil|Location1.Y=3059.846mil|Location2.Y=3071.096mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5501.387mil|Location2.X=5512.637mil|Location1.Y=3059.846mil|Location2.Y=3071.096mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad C4-1(5528.492mil,3049.723mil) on Top Layer And Track (5500.492mil,3049.723mil)(5500.492mil,3074.62mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5503.97mil|Location2.X=5515.22mil|Location1.Y=3062.452mil|Location2.Y=3073.702mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5503.97mil|Location2.X=5515.22mil|Location1.Y=3062.452mil|Location2.Y=3073.702mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.213mil &lt; 10mil) Between Pad C4-1(5528.492mil,3049.723mil) on Top Layer And Track (5500.492mil,3074.62mil)(5556.492mil,3074.62mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.213mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5540.086mil|Location2.X=5551.336mil|Location1.Y=3024.992mil|Location2.Y=3036.242mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5540.086mil|Location2.X=5551.336mil|Location1.Y=3024.992mil|Location2.Y=3036.242mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (7.508mil &lt; 10mil) Between Pad C4-1(5528.492mil,3049.723mil) on Top Layer And Track (5514.713mil,3023.738mil)(5542.272mil,3023.738mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [7.508mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5544.348mil|Location2.X=5555.598mil|Location1.Y=3044.098mil|Location2.Y=3055.348mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5544.348mil|Location2.X=5555.598mil|Location1.Y=3044.098mil|Location2.Y=3055.348mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad C4-1(5528.492mil,3049.723mil) on Top Layer And Track (5556.492mil,3049.723mil)(5556.492mil,3074.62mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5501.387mil|Location2.X=5512.637mil|Location1.Y=2966.145mil|Location2.Y=2977.395mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5501.387mil|Location2.X=5512.637mil|Location1.Y=2966.145mil|Location2.Y=2977.395mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad C4-2(5528.492mil,2987.518mil) on Top Layer And Track (5500.492mil,2962.62mil)(5500.492mil,2987.518mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5541.765mil|Location2.X=5553.015mil|Location1.Y=2963.539mil|Location2.Y=2974.789mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5541.765mil|Location2.X=5553.015mil|Location1.Y=2963.539mil|Location2.Y=2974.789mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.213mil &lt; 10mil) Between Pad C4-2(5528.492mil,2987.518mil) on Top Layer And Track (5500.492mil,2962.62mil)(5556.492mil,2962.62mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.213mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5509.088mil|Location2.X=5520.338mil|Location1.Y=3000.791mil|Location2.Y=3012.041mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5509.088mil|Location2.X=5520.338mil|Location1.Y=3000.791mil|Location2.Y=3012.041mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (6.299mil &lt; 10mil) Between Pad C4-2(5528.492mil,2987.518mil) on Top Layer And Track (5514.713mil,3013.502mil)(5542.272mil,3013.502mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [6.299mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5544.348mil|Location2.X=5555.598mil|Location1.Y=2966.145mil|Location2.Y=2977.395mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5544.348mil|Location2.X=5555.598mil|Location1.Y=2966.145mil|Location2.Y=2977.395mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad C4-2(5528.492mil,2987.518mil) on Top Layer And Track (5556.492mil,2962.62mil)(5556.492mil,2987.518mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5272.893mil|Location2.X=5284.143mil|Location1.Y=3142.988mil|Location2.Y=3154.238mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5272.893mil|Location2.X=5284.143mil|Location1.Y=3142.988mil|Location2.Y=3154.238mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.402mil &lt; 10mil) Between Pad IC1-1(5297.571mil,3161.719mil) on Top Layer And Track (5229.571mil,3146.719mil)(5271.571mil,3146.719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.402mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5272.946mil|Location2.X=5284.196mil|Location1.Y=3168.094mil|Location2.Y=3179.344mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5272.946mil|Location2.X=5284.196mil|Location1.Y=3168.094mil|Location2.Y=3179.344mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8mil &lt; 10mil) Between Pad IC1-1(5297.571mil,3161.719mil) on Top Layer And Track (5271.571mil,3146.719mil)(5271.571mil,3252.719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5272.946mil|Location2.X=5284.196mil|Location1.Y=3206.094mil|Location2.Y=3217.344mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5272.946mil|Location2.X=5284.196mil|Location1.Y=3206.094mil|Location2.Y=3217.344mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8mil &lt; 10mil) Between Pad IC1-2(5297.571mil,3199.719mil) on Top Layer And Track (5271.571mil,3146.719mil)(5271.571mil,3252.719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5272.893mil|Location2.X=5284.143mil|Location1.Y=3245.199mil|Location2.Y=3256.449mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5272.893mil|Location2.X=5284.143mil|Location1.Y=3245.199mil|Location2.Y=3256.449mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.402mil &lt; 10mil) Between Pad IC1-3(5297.571mil,3237.719mil) on Top Layer And Track (5229.571mil,3252.719mil)(5271.571mil,3252.719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.402mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5272.946mil|Location2.X=5284.196mil|Location1.Y=3244.094mil|Location2.Y=3255.344mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5272.946mil|Location2.X=5284.196mil|Location1.Y=3244.094mil|Location2.Y=3255.344mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8mil &lt; 10mil) Between Pad IC1-3(5297.571mil,3237.719mil) on Top Layer And Track (5271.571mil,3146.719mil)(5271.571mil,3252.719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5216.946mil|Location2.X=5228.196mil|Location1.Y=3220.094mil|Location2.Y=3231.344mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5216.946mil|Location2.X=5228.196mil|Location1.Y=3220.094mil|Location2.Y=3231.344mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8mil &lt; 10mil) Between Pad IC1-4(5203.571mil,3237.719mil) on Top Layer And Track (5229.571mil,3146.719mil)(5229.571mil,3252.719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5216.999mil|Location2.X=5228.249mil|Location1.Y=3245.199mil|Location2.Y=3256.449mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5216.999mil|Location2.X=5228.249mil|Location1.Y=3245.199mil|Location2.Y=3256.449mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.402mil &lt; 10mil) Between Pad IC1-4(5203.571mil,3237.719mil) on Top Layer And Track (5229.571mil,3252.719mil)(5271.571mil,3252.719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.402mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5216.946mil|Location2.X=5228.196mil|Location1.Y=3182.094mil|Location2.Y=3193.344mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5216.946mil|Location2.X=5228.196mil|Location1.Y=3182.094mil|Location2.Y=3193.344mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8mil &lt; 10mil) Between Pad IC1-5(5203.571mil,3199.719mil) on Top Layer And Track (5229.571mil,3146.719mil)(5229.571mil,3252.719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5216.946mil|Location2.X=5228.196mil|Location1.Y=3144.094mil|Location2.Y=3155.344mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5216.946mil|Location2.X=5228.196mil|Location1.Y=3144.094mil|Location2.Y=3155.344mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8mil &lt; 10mil) Between Pad IC1-6(5203.571mil,3161.719mil) on Top Layer And Track (5229.571mil,3146.719mil)(5229.571mil,3252.719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5216.999mil|Location2.X=5228.249mil|Location1.Y=3142.988mil|Location2.Y=3154.238mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5216.999mil|Location2.X=5228.249mil|Location1.Y=3142.988mil|Location2.Y=3154.238mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (8.402mil &lt; 10mil) Between Pad IC1-6(5203.571mil,3161.719mil) on Top Layer And Track (5229.571mil,3146.719mil)(5271.571mil,3146.719mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [8.402mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5261.287mil|Location2.X=5272.537mil|Location1.Y=3278.064mil|Location2.Y=3289.314mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5261.287mil|Location2.X=5272.537mil|Location1.Y=3278.064mil|Location2.Y=3289.314mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad R1-1(5288.392mil,3299.437mil) on Top Layer And Track (5260.392mil,3274.54mil)(5260.392mil,3299.437mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5301.665mil|Location2.X=5312.915mil|Location1.Y=3275.458mil|Location2.Y=3286.708mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5301.665mil|Location2.X=5312.915mil|Location1.Y=3275.458mil|Location2.Y=3286.708mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.213mil &lt; 10mil) Between Pad R1-1(5288.392mil,3299.437mil) on Top Layer And Track (5260.392mil,3274.54mil)(5316.392mil,3274.54mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.213mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5304.248mil|Location2.X=5315.498mil|Location1.Y=3278.064mil|Location2.Y=3289.314mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5304.248mil|Location2.X=5315.498mil|Location1.Y=3278.064mil|Location2.Y=3289.314mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad R1-1(5288.392mil,3299.437mil) on Top Layer And Track (5316.392mil,3274.54mil)(5316.392mil,3299.437mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5261.287mil|Location2.X=5272.537mil|Location1.Y=3371.765mil|Location2.Y=3383.015mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5261.287mil|Location2.X=5272.537mil|Location1.Y=3371.765mil|Location2.Y=3383.015mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad R1-2(5288.392mil,3361.642mil) on Top Layer And Track (5260.392mil,3361.642mil)(5260.392mil,3386.54mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5263.87mil|Location2.X=5275.12mil|Location1.Y=3374.371mil|Location2.Y=3385.621mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5263.87mil|Location2.X=5275.12mil|Location1.Y=3374.371mil|Location2.Y=3385.621mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.213mil &lt; 10mil) Between Pad R1-2(5288.392mil,3361.642mil) on Top Layer And Track (5260.392mil,3386.54mil)(5316.392mil,3386.54mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.213mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5304.248mil|Location2.X=5315.498mil|Location1.Y=3356.017mil|Location2.Y=3367.267mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5304.248mil|Location2.X=5315.498mil|Location1.Y=3356.017mil|Location2.Y=3367.267mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad R1-2(5288.392mil,3361.642mil) on Top Layer And Track (5316.392mil,3361.642mil)(5316.392mil,3386.54mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5187.403mil|Location2.X=5198.653mil|Location1.Y=3371.765mil|Location2.Y=3383.015mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5187.403mil|Location2.X=5198.653mil|Location1.Y=3371.765mil|Location2.Y=3383.015mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad R2-1(5214.508mil,3361.642mil) on Top Layer And Track (5186.508mil,3361.642mil)(5186.508mil,3386.54mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5189.986mil|Location2.X=5201.236mil|Location1.Y=3374.371mil|Location2.Y=3385.621mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5189.986mil|Location2.X=5201.236mil|Location1.Y=3374.371mil|Location2.Y=3385.621mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.213mil &lt; 10mil) Between Pad R2-1(5214.508mil,3361.642mil) on Top Layer And Track (5186.508mil,3386.54mil)(5242.508mil,3386.54mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.213mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5230.364mil|Location2.X=5241.614mil|Location1.Y=3356.017mil|Location2.Y=3367.267mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5230.364mil|Location2.X=5241.614mil|Location1.Y=3356.017mil|Location2.Y=3367.267mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad R2-1(5214.508mil,3361.642mil) on Top Layer And Track (5242.508mil,3361.642mil)(5242.508mil,3386.54mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5187.403mil|Location2.X=5198.653mil|Location1.Y=3278.064mil|Location2.Y=3289.314mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5187.403mil|Location2.X=5198.653mil|Location1.Y=3278.064mil|Location2.Y=3289.314mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad R2-2(5214.508mil,3299.437mil) on Top Layer And Track (5186.508mil,3274.54mil)(5186.508mil,3299.437mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5227.781mil|Location2.X=5239.031mil|Location1.Y=3275.458mil|Location2.Y=3286.708mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5227.781mil|Location2.X=5239.031mil|Location1.Y=3275.458mil|Location2.Y=3286.708mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.213mil &lt; 10mil) Between Pad R2-2(5214.508mil,3299.437mil) on Top Layer And Track (5186.508mil,3274.54mil)(5242.508mil,3274.54mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.213mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5230.364mil|Location2.X=5241.614mil|Location1.Y=3278.064mil|Location2.Y=3289.314mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5230.364mil|Location2.X=5241.614mil|Location1.Y=3278.064mil|Location2.Y=3289.314mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad R2-2(5214.508mil,3299.437mil) on Top Layer And Track (5242.508mil,3274.54mil)(5242.508mil,3299.437mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5113.519mil|Location2.X=5124.769mil|Location1.Y=3371.765mil|Location2.Y=3383.015mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5113.519mil|Location2.X=5124.769mil|Location1.Y=3371.765mil|Location2.Y=3383.015mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad R3-1(5140.624mil,3361.642mil) on Top Layer And Track (5112.624mil,3361.642mil)(5112.624mil,3386.54mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5116.102mil|Location2.X=5127.352mil|Location1.Y=3374.371mil|Location2.Y=3385.621mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5116.102mil|Location2.X=5127.352mil|Location1.Y=3374.371mil|Location2.Y=3385.621mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.213mil &lt; 10mil) Between Pad R3-1(5140.624mil,3361.642mil) on Top Layer And Track (5112.624mil,3386.54mil)(5168.624mil,3386.54mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.213mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5156.48mil|Location2.X=5167.73mil|Location1.Y=3356.017mil|Location2.Y=3367.267mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5156.48mil|Location2.X=5167.73mil|Location1.Y=3356.017mil|Location2.Y=3367.267mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad R3-1(5140.624mil,3361.642mil) on Top Layer And Track (5168.624mil,3361.642mil)(5168.624mil,3386.54mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5113.519mil|Location2.X=5124.769mil|Location1.Y=3278.064mil|Location2.Y=3289.314mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5113.519mil|Location2.X=5124.769mil|Location1.Y=3278.064mil|Location2.Y=3289.314mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad R3-2(5140.624mil,3299.437mil) on Top Layer And Track (5112.624mil,3274.54mil)(5112.624mil,3299.437mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5153.897mil|Location2.X=5165.147mil|Location1.Y=3275.458mil|Location2.Y=3286.708mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5153.897mil|Location2.X=5165.147mil|Location1.Y=3275.458mil|Location2.Y=3286.708mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.213mil &lt; 10mil) Between Pad R3-2(5140.624mil,3299.437mil) on Top Layer And Track (5112.624mil,3274.54mil)(5168.624mil,3274.54mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.213mil]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5156.48mil|Location2.X=5167.73mil|Location1.Y=3278.064mil|Location2.Y=3289.314mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Power\Projects\Modularity_of_Functional_Circuit\Power\SX1308\SX1308_V2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5156.48mil|Location2.X=5167.73mil|Location1.Y=3278.064mil|Location2.Y=3289.314mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (5.165mil &lt; 10mil) Between Pad R3-2(5140.624mil,3299.437mil) on Top Layer And Track (5168.624mil,3274.54mil)(5168.624mil,3299.437mil) on Top Overlay [Top Overlay] to [Top Solder] clearance [5.165mil]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
