@@ -124,6 +124,23 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=ADECAYOH
 
+[Document6]
+DocumentPath=IR2104S_V4_5x5.PcbDoc
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=ADECAYOH
+
 [GeneratedDocument1]
 DocumentPath=Project Outputs for IR2104S\Design Rule Check - IR2104S_V4.html
 DItemRevisionGUID=
