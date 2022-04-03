@@ -164,6 +164,10 @@ DocumentUniqueId=PPUPFTND
 DocumentPath=Project Outputs for IR2104S\Design Rule Check - IR2104S_V4.html
 DItemRevisionGUID=
 
+[GeneratedDocument2]
+DocumentPath=Project Outputs for IR2104S\Design Rule Check - IR2104S_V5.html
+DItemRevisionGUID=
+
 [Configuration1]
 Name=Sources
 ParameterCount=0
